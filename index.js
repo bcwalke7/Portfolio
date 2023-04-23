@@ -1,12 +1,11 @@
-import { gsap } from "gsap";
 
 import * as THREE from 'https://unpkg.com/three@0.151.3/build/three.module.js';
-import * as dat from 'dat.gui';
 import { OrbitControls } from 'https://unpkg.com/three@0.151.3/examples/jsm/controls/OrbitControls.js';
+// import * as dat from 'dat.gui';
 
-console.log(dat);
 
-const gui = new dat.GUI()
+
+// const gui = new dat.GUI()
 const world = {
     plane: {
         width: 400,
@@ -15,10 +14,10 @@ const world = {
         heightSegments: 50,
     }
 }
-gui.add(world.plane, 'width', 1, 500).onChange(generatePlane)
-gui.add(world.plane, 'height', 1, 500).onChange(generatePlane)
-gui.add(world.plane, 'widthSegments', 1, 100).onChange(generatePlane)
-gui.add(world.plane, 'heightSegments', 1, 100).onChange(generatePlane)
+// gui.add(world.plane, 'width', 1, 500).onChange(generatePlane)
+// gui.add(world.plane, 'height', 1, 500).onChange(generatePlane)
+// gui.add(world.plane, 'widthSegments', 1, 100).onChange(generatePlane)
+// gui.add(world.plane, 'heightSegments', 1, 100).onChange(generatePlane)
 
 function generatePlane() {
     planeMesh.geometry.dispose()
