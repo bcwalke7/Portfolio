@@ -63,6 +63,7 @@ document.body.appendChild(renderer.domElement)
 new OrbitControls(camera, renderer.domElement)
 camera.position.z = 50
 
+
 const planGeometry = new THREE.PlaneGeometry(world.plane.width, world.plane.height, world.plane.widthSegments, world.plane.heightSegments);
 const planeMaterial = new THREE.
     MeshPhongMaterial({
@@ -172,4 +173,10 @@ animate()
 addEventListener('mousemove', (event) => {
     mouse.x = (event.clientX / innerWidth) * 2 - 1
     mouse.y = -(event.clientY / innerHeight) * 2 + 1
+})
+
+addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(innerWidth, innerHeight)
 })
