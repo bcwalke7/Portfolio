@@ -23,12 +23,60 @@
     </script>
   </head>
 
-  <body>
-    <div id="welcome">
-      <p class="line1">Hey! I'm <span class="name">Brandon</span></p>
-      <p class="line2">I'm a Full Stack Web Developer</p>
-      <button>Learn More</button>
+  <body id="landing">
+    <header>
+      <div id="welcome">
+        <p class="line1">Hey! I'm <span class="name">Brandon</span></p>
+        <p class="line2">I'm a Full Stack Web Developer</p>
+        <a href="#content" id="homeButton"><div>Learn More</div></a>
+      </div>
+    </header>
+    <div id="content">
+      <nav id="navigation">
+        <h1>Brandon Walker</h1>
+        <ul>
+          <li><a href="#landing">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <main>
+        <section id="about">
+          <h2>About</h2>
+          <p>
+            As an ambitious developer and a senior student pursuing my
+            Bachelor's degree in Full Stack Web Development from Arizona State
+            University, I'm passionate about creating cutting-edge web
+            applications that make a meaningful impact. With a solid foundation
+            in front-end and back-end technologies, I bring a wealth of
+            technical expertise to every project I undertake. I have honed my
+            skills through hands-on experience and coursework, mastering the art
+            of crafting efficient, scalable, and user-friendly solutions. My
+            commitment to excellence extends beyond coding, as I also possess
+            strong problem-solving and critical-thinking abilities that allow me
+            to tackle complex challenges head-on. I thrive in collaborative
+            environments, working seamlessly with cross-functional teams to
+            deliver high-quality products. When I'm not coding, you can find me
+            staying up-to-date with the latest industry trends, baking up a
+            storm in the kitchen, lifting at the gym, or exploring the Pacific
+            North West with my dog, Berkley. I'm excited to continue my journey
+            as a Full Stack Web Developer and contribute my expertise to create
+            meaningful digital experiences. Let's bring your vision to life!
+          </p>
+        </section>
+        <section id="projects">
+          <h2>Projects</h2>
+        </section>
+        <section id="contact">
+          <h2>Contact</h2>
+        </section>
+      </main>
+      <footer>
+        <p>Brandon Walker copyright @2023</p>
+      </footer>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script type="module" src="index.js"></script>
   </body>

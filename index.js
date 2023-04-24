@@ -45,7 +45,7 @@ function generatePlane() {
 
     const colors = []
     for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
-        colors.push(0, .19, .4)
+        colors.push(.85, .32, .02)
     }
 
     planeMesh.geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3))
@@ -135,15 +135,15 @@ function animate() {
         intersects[0].object.geometry.attributes.color.needsUpdate = true
 
         const initialColor = {
-            r: 0,
-            g: 0.19,
-            b: 0.4,
+            r: 0.85,
+            g: 0.32,
+            b: 0.02,
         }
 
         const hoverColor = {
-            r: 0.1,
-            g: 0.5,
-            b: 1,
+            r: 0.95,
+            g: 0.61,
+            b: 0.31,
         }
 
         gsap.to(hoverColor, {
@@ -185,3 +185,13 @@ addEventListener('resize', () => {
     camera.updateProjectionMatrix()
     renderer.setSize(innerWidth, innerHeight)
 })
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
