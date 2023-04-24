@@ -8,10 +8,10 @@ import { OrbitControls } from 'https://unpkg.com/three@0.151.3/examples/jsm/cont
 // const gui = new dat.GUI()
 const world = {
     plane: {
-        width: 400,
-        height: 400,
-        widthSegments: 50,
-        heightSegments: 50,
+        width: 500,
+        height: 500,
+        widthSegments: 55,
+        heightSegments: 55,
     }
 }
 // gui.add(world.plane, 'width', 1, 500).onChange(generatePlane)
@@ -60,8 +60,13 @@ renderer.setSize(innerWidth, innerHeight)
 renderer.setPixelRatio(devicePixelRatio)
 document.body.appendChild(renderer.domElement)
 
-new OrbitControls(camera, renderer.domElement)
-camera.position.z = 50
+const controls = new OrbitControls(camera, renderer.domElement)
+camera.position.z = 50;
+controls.enableZoom = false;
+controls.minPolarAngle = 1.19;
+controls.maxPolarAngle = Math.PI * .62;
+controls.minAzimuthAngle = -.15;
+controls.maxAzimuthAngle = .15;
 
 
 const planGeometry = new THREE.PlaneGeometry(world.plane.width, world.plane.height, world.plane.widthSegments, world.plane.heightSegments);
