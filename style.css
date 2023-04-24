@@ -154,8 +154,61 @@ button {
   border-radius: 3px;
   font-size: 1.5rem;
   padding: 0px 20px;
+  animation-name: moveInBottom;
+  animation-delay: 1s;
+  animation-fill-mode: backwards;
 }
 
 .name {
   font-size: 3.5rem;
+}
+
+.line1,
+.line2,
+button {
+  animation-duration: 3.5s;
+  animation-timing-function: cubic-bezier(0.21, 1.11, 0.81, 0.99);
+}
+
+.line1 {
+  animation-name: moveInLeft;
+}
+
+.line2 {
+  animation-name: moveInRight;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(10rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
