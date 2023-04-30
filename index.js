@@ -107,9 +107,9 @@ function animate() {
     const { array, originalPosition, randomValues } = planeMesh.geometry.attributes.position
     for (let i = 0; i < array.length; i += 3) {
         // x
-        array[i] = originalPosition[i] + Math.cos(frame + randomValues[i]) * 0.003
+        array[i] = originalPosition[i] + Math.cos(frame + randomValues[i]) * 0.007
         // y
-        array[i + 1] = originalPosition[i + 1] + Math.sin(frame + randomValues[i + 1]) * 0.003
+        array[i + 1] = originalPosition[i + 1] + Math.sin(frame + randomValues[i + 1]) * 0.007
     }
 
     planeMesh.geometry.attributes.position.needsUpdate = true
@@ -172,8 +172,8 @@ function animate() {
     }
 }
 
-animate()
 
+animate()
 
 addEventListener('mousemove', (event) => {
     mouse.x = (event.clientX / innerWidth) * 2 - 1
@@ -195,3 +195,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+// SCROLL COLOR
+
+
+
+
