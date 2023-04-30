@@ -137,11 +137,16 @@ table {
 }
 
 #about,
-#projects,
-#contact {
+#projects {
   height: 100vh;
   font-family: "Bayon", sans-serif;
   scroll-margin-top: 88px;
+}
+
+#contact {
+  font-family: "Bayon", sans-serif;
+  scroll-margin-top: 88px;
+  height: 77vh;
 }
 
 #welcome {
@@ -340,7 +345,4 @@ footer {
   height: 88px;
   display: flex;
   background-color: #d95204;
-  margin-top: -176px;
-  position: ;
-  bottom: 0;
 }
