@@ -4,7 +4,7 @@ import { OrbitControls } from 'https://unpkg.com/three@0.151.3/examples/jsm/cont
 // import * as dat from 'dat.gui';
 
 
-
+// START THREE BACKGROUND
 // const gui = new dat.GUI()
 const world = {
     plane: {
@@ -172,7 +172,6 @@ function animate() {
     }
 }
 
-
 animate()
 
 addEventListener('mousemove', (event) => {
@@ -186,6 +185,7 @@ addEventListener('resize', () => {
     renderer.setSize(innerWidth, innerHeight)
 })
 
+// END THREE BACKGROUND
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -195,8 +195,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
-// SCROLL COLOR
+// SCROLL animate
+const element = document.querySelector('.langCont');
+const observer = new IntersectionObserver(entries => {
+    element.classList.toggle('animation', entries[0].isIntersecting);
+});
 
-
+observer.observe(element);
 
 
