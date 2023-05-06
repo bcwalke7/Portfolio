@@ -220,6 +220,23 @@ main {
   animation-fill-mode: backwards;
 }
 
+.floating { 
+  animation-name: floating;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+  animation-delay: 3s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes floating {
+  0% { transform: translate(0,  0px); }
+  50%  { transform: translate(0, 15px); }
+  100%   { transform: translate(0, -0px); }   
+}
+
 @keyframes moveInLeft {
   0% {
     opacity: 0;
@@ -261,6 +278,14 @@ nav {
   top: 0;
   font-family: "Bayon", sans-serif;
   box-sizing: border-box;
+  box-shadow:
+  0 2.8px 2.2px rgba(169, 73, 18, 0.034),
+  0 6.7px 5.3px rgba(169, 73, 18, 0.048),
+  0 12.5px 10px rgba(169, 73, 18, 0.06),
+  0 22.3px 17.9px rgba(169, 73, 18, 0.072),
+  0 41.8px 33.4px rgba(169, 73, 18, 0.086),
+  0 100px 80px rgba(169, 73, 18, 0.12)
+;
 }
 
 #navigation {
@@ -276,7 +301,7 @@ li a {
 }
 
 h1 {
-  padding-left: 2em;
+
 }
 
 h2 {
@@ -289,7 +314,7 @@ h2 {
 ul {
   display: flex;
   gap: 3rem;
-  padding-right: 2rem;
+
 }
 
 #about {
@@ -326,13 +351,15 @@ ul {
   border-radius: 15px;
   justify-content: end;
   max-height: 100px;
-   animation: flip 0.5s linear;
+  visibility: hidden;
   animation-fill-mode:backwards;
   animation-delay: 1s; 
 }
 
-.spin {
-  
+.flip-animation {
+  animation: flip 0.5s linear;
+  animation-fill-mode: backwards;
+  visibility: visible;
 }
 
 .langCont p {
@@ -341,8 +368,19 @@ ul {
   font-size: 1rem !important;
 }
 
-.lc1 {
+.lc1{
+  animation-delay: 0.2s;
 }
+.lc2{
+  animation-delay: 0.4s;
+}
+.lc3{
+  animation-delay: 0.6s;
+}
+.lc4{
+  animation-delay: 0.8s;
+}
+
 
 @keyframes flip {
   0% {

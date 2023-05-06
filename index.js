@@ -195,12 +195,30 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
-// SCROLL animate
-const element = document.querySelector('.langCont');
-const observer = new IntersectionObserver(entries => {
-    element.classList.toggle('animation', entries[0].isIntersecting);
+// animate when in viewport
+
+const langConts = document.querySelectorAll('.langCont');
+
+const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 1
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('flip-animation');
+        } else {
+            entry.target.classList.remove('flip-animation');
+        }
+    });
+}, options);
+
+langConts.forEach(langCont => {
+    observer.observe(langCont);
 });
 
-observer.observe(element);
-
+observer.observe(langConts);
+// end animate in viewport
 
