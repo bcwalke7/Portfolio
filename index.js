@@ -186,6 +186,146 @@ addEventListener('resize', () => {
 })
 
 // END THREE BACKGROUND
+// Nav animate//
+let nav = $("nav");
+let line = $("<div />").addClass("line");
+
+line.appendTo(nav);
+
+let active = nav.find(".active");
+let pos = 0;
+let wid = 0;
+
+if (active.length) {
+    pos = active.position().left;
+    wid = active.width();
+    line.css({
+        left: pos,
+        width: wid
+    });
+}
+
+nav.find("ul li a").click(function (e) {
+    e.preventDefault();
+    if (!$(this).parent().hasClass("active") && !nav.hasClass("animate")) {
+        nav.addClass("animate");
+
+        let _this = $(this);
+
+        nav.find("ul li").removeClass("active");
+
+        let position = _this.parent().position();
+        let width = _this.parent().width();
+
+        if (position.left >= pos) {
+            line.animate(
+                {
+                    width: position.left - pos + width
+                },
+                300,
+                function () {
+                    line.animate(
+                        {
+                            width: width,
+                            left: position.left
+                        },
+                        150,
+                        function () {
+                            nav.removeClass("animate");
+                        }
+                    );
+                    _this.parent().addClass("active");
+                }
+            );
+        } else {
+            line.animate(
+                {
+                    left: position.left,
+                    width: pos - position.left + wid
+                },
+                300,
+                function () {
+                    line.animate(
+                        {
+                            width: width
+                        },
+                        150,
+                        function () {
+                            nav.removeClass("animate");
+                        }
+                    );
+                    _this.parent().addClass("active");
+                }
+            );
+        }
+
+        pos = position.left;
+        wid = width;
+    }
+});
+//
+// Function to check if an element is in the viewport
+function isInViewport(element) {
+    var rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Function to update the active link based on the scroll position
+function updateActiveLink() {
+    var links = $("nav ul li a");
+    var activeLink = null;
+
+    for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        var target = $(link.getAttribute('href'))[0];
+
+        if (isInViewport(target)) {
+            activeLink = link;
+            break;
+        }
+    }
+
+    if (activeLink) {
+        $("nav ul li").removeClass("active");
+        $(activeLink).parent().addClass("active");
+
+        // Add the "animate" class to the navigation bar
+        $("nav").addClass("animate");
+        var position = $(activeLink).parent().position();
+        var width = $(activeLink).parent().width();
+        var line = $("nav .line");
+
+        line.stop().animate(
+            {
+                width: width,
+                left: position.left
+            },
+            150,
+            function () {
+                $("nav").removeClass("animate");
+            }
+        );
+    }
+}
+
+// Event listener for scroll event
+window.addEventListener('scroll', function () {
+    updateActiveLink();
+});
+
+// Initial check on page load
+updateActiveLink();
+
+//end Nav Animate
+
+
+
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -221,4 +361,3 @@ langConts.forEach(langCont => {
 
 observer.observe(langConts);
 // end animate in viewport
-
