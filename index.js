@@ -186,142 +186,124 @@ addEventListener('resize', () => {
 })
 
 // END THREE BACKGROUND
-// Nav animate//
-let nav = $("nav");
-let line = $("<div />").addClass("line");
 
-line.appendTo(nav);
+$(document).ready(function () {
+    let nav = $("nav");
+    let line = $("<div />").addClass("line");
 
-let active = nav.find(".active");
-let pos = 0;
-let wid = 0;
+    line.appendTo(nav);
 
-if (active.length) {
-    pos = active.position().left;
-    wid = active.width();
-    line.css({
-        left: pos,
-        width: wid
-    });
-}
+    let active = nav.find(".active");
+    let pos = 0;
+    let wid = 0;
 
-nav.find("ul li a").click(function (e) {
-    e.preventDefault();
-    if (!$(this).parent().hasClass("active") && !nav.hasClass("animate")) {
-        nav.addClass("animate");
+    if (active.length) {
+        pos = active.position().left;
+        wid = active.width();
+        line.css({
+            left: pos,
+            width: wid
+        });
+    }
 
+    nav.find("ul li a").on("click", function (e) {
+        e.preventDefault();
         let _this = $(this);
+        if (!_this.parent().hasClass("active") && !nav.hasClass("animate")) {
+            nav.addClass("animate");
+            nav.find("ul li").removeClass("active");
 
-        nav.find("ul li").removeClass("active");
+            let position = _this.parent().position();
+            let width = _this.parent().width();
 
-        let position = _this.parent().position();
-        let width = _this.parent().width();
-
-        if (position.left >= pos) {
-            line.animate(
-                {
-                    width: position.left - pos + width
-                },
-                300,
-                function () {
-                    line.animate(
-                        {
-                            width: width,
-                            left: position.left
-                        },
-                        150,
-                        function () {
-                            nav.removeClass("animate");
-                        }
-                    );
-                    _this.parent().addClass("active");
-                }
-            );
-        } else {
-            line.animate(
-                {
-                    left: position.left,
-                    width: pos - position.left + wid
-                },
-                300,
-                function () {
-                    line.animate(
-                        {
-                            width: width
-                        },
-                        150,
-                        function () {
-                            nav.removeClass("animate");
-                        }
-                    );
-                    _this.parent().addClass("active");
-                }
-            );
-        }
-
-        pos = position.left;
-        wid = width;
-    }
-});
-//
-// Function to check if an element is in the viewport
-function isInViewport(element) {
-    var rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-// Function to update the active link based on the scroll position
-function updateActiveLink() {
-    var links = $("nav ul li a");
-    var activeLink = null;
-
-    for (var i = 0; i < links.length; i++) {
-        var link = links[i];
-        var target = $(link.getAttribute('href'))[0];
-
-        if (isInViewport(target)) {
-            activeLink = link;
-            break;
-        }
-    }
-
-    if (activeLink) {
-        $("nav ul li").removeClass("active");
-        $(activeLink).parent().addClass("active");
-
-        // Add the "animate" class to the navigation bar
-        $("nav").addClass("animate");
-        var position = $(activeLink).parent().position();
-        var width = $(activeLink).parent().width();
-        var line = $("nav .line");
-
-        line.stop().animate(
-            {
-                width: width,
-                left: position.left
-            },
-            150,
-            function () {
-                $("nav").removeClass("animate");
+            if (position.left >= pos) {
+                line.animate(
+                    {
+                        width: position.left - pos + width
+                    },
+                    300,
+                    function () {
+                        line.animate(
+                            {
+                                width: width,
+                                left: position.left
+                            },
+                            150,
+                            function () {
+                                nav.removeClass("animate");
+                            }
+                        );
+                        _this.parent().addClass("active");
+                    }
+                );
+            } else {
+                line.animate(
+                    {
+                        left: position.left,
+                        width: pos - position.left + wid
+                    },
+                    300,
+                    function () {
+                        line.animate(
+                            {
+                                width: width
+                            },
+                            150,
+                            function () {
+                                nav.removeClass("animate");
+                            }
+                        );
+                        _this.parent().addClass("active");
+                    }
+                );
             }
-        );
-    }
-}
 
-// Event listener for scroll event
-window.addEventListener('scroll', function () {
-    updateActiveLink();
+            pos = position.left;
+            wid = width;
+
+            // Smooth scrolling when clicking on navigation links
+            let target = _this.attr("href");
+            $('html, body').animate({
+                scrollTop: $(target).offset().top - 88
+            }, 500);
+        }
+    });
+
+    // Intersection Observer for smooth animation
+    let options = {
+        root: null,
+        rootMargin: "-88px 0px 0px 0px",
+        threshold: 0.2
+    };
+
+    let observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                let targetId = entry.target.getAttribute("id");
+                nav.find("ul li").removeClass("active");
+                $('a[href="#' + targetId + '"]').parent().addClass("active");
+
+                pos = $('a[href="#' + targetId + '"]').position().left;
+                wid = $('a[href="#' + targetId + '"]').width();
+
+                line.animate(
+                    {
+                        width: wid,
+                        left: pos
+                    },
+                    150
+                );
+            }
+        });
+    }, options);
+
+    // Observe each section
+    $("section").each(function () {
+        observer.observe(this);
+    });
 });
 
-// Initial check on page load
-updateActiveLink();
-
-//end Nav Animate
+// //end Nav Animate
 
 
 
@@ -359,5 +341,4 @@ langConts.forEach(langCont => {
     observer.observe(langCont);
 });
 
-observer.observe(langConts);
 // end animate in viewport
