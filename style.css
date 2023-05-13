@@ -522,33 +522,41 @@ footer {
   width: 100%;
   height: 88px;
   background-color: #d95204;
-  padding: 24px;
+
   box-sizing: border-box;
   font-family: "Bayon", sans-serif;
 }
 
 .footFlex {
   display: flex;
+  width: 100%;
+  height: 88px;
   align-items: center;
   justify-content: space-between;
 }
 
-footer img {
-  width: 50px;
+.footFlex p {
+  padding-left: 20px;
 }
 
-footer a {
+footer img {
+  width: 50px;
+  padding-right: 20px;
+}
+
+footer #return {
   height: 50px;
   width: 50px;
   position: absolute;
   bottom: 60px;
   left: 50%;
   padding: 5px;
-  padding-top: 8px;
+  padding-top: 6px;
+
   background-color: aquamarine;
 }
 
-footer a:hover {
+footer #return:hover {
   animation: bounce 1s infinite;
   animation-timing-function: ease-in-out;
 }
